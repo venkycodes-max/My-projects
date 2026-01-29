@@ -1,0 +1,406 @@
+import sys
+import mysql.connector as mys
+
+def Menu():
+    print("━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━")
+    print()
+    print("                            ➳Molecular Database                       ")
+    print("                ༺═───────────────────═༻             ")
+    print()
+    print("     ➳MENU ")
+    print()
+    print("     ➳Gives information about Drugs ")
+    print()
+    print("                                ➳Commands ")
+    print("             ╭──────────────────.★..────╮         ")
+    print("                     0. Create connection")
+    print("                     1. View Records")
+    print("                     2. Load Records")
+    print("                     3. Insert Data")
+    print("                     4. Display all Data")
+    print("                     5. Search for Data")
+    print("                     6. Advanced search ")
+    print("                     7. Update Data Values")
+    print("                     8. Delete Data Values")
+    print("                     9. Exit program")
+    print("             ╰─────..★.─────────────────╯          ")
+    print(" ")
+    print("━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━")
+
+def Menu2():
+    print("━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━━◦○◦━◦○◦━◦○◦━◦○◦━")
+    print()
+    print("                             ➳Molecular Database ")
+    print("                 ༺═────────────────────═༻           ")
+    print( )
+    print("       ➳Advacned Search Menu")
+    print()
+    print("                                 ➳Commands ")
+    print("            ╭─────────────────────────────────.★..────╮     ")
+    print("                      1. Search Occurrence by Compound name")
+    print("                      2. Search Price by Compound name ")
+    print("                      3. Search Formula by Compound name")
+    print("                      4. Search Side effects by Compound name")
+    print("                      5. Search Applications by Compound name ")
+    print("                      6. Search Nature by Compound name ")
+    print("                      7. Back to Main Menu")
+    print("           ╰─────..★.────────────────────────────────╯       ")
+
+    
+def create_connection():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV')
+    try:
+        if mycon.is_connected:
+            print("Connection done")
+    except:
+        pass
+    mycursor = mycon.cursor()
+
+    try:
+        mycursor.execute("create database MD")
+        print("Database created")
+    except:
+        pass
+    mycon.close()
+    
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV',database='MD')
+    mycursor=mycon.cursor()
+    
+    table_query = "create table MOL (CName varchar(225), Formula varchar(255), Applications varchar(255), Occurrence varchar(255), SE varchar(225),Price decimal(8,2),Nature varchar(25)) "
+
+    try:
+        mycursor.execute(table_query)
+        print("Table created")
+    except:
+        pass
+    mycon.close()
+
+def view_records():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV',database='MD')
+    mycursor=mycon.cursor()
+    
+    L = [['Cardiac glycosides', 'C41H64O14', 'Increase the output force of the heart and increase its rate of contractions by acting on the cellular sodium-potassium ATPase pump', 'Natural', 'Dizziness, fatigue, headache, anxiety, gastrointestinal upset, change in taste and blurred vision', 14.34, 'Neutral\n'] , ['Cisplatin', 'cis-[Pt(NH3)2Cl2]', 'To manage and treat solid tumours and hematologic malignancies and to treat advanced cancer of the bladder', 'Artificial', 'Burning, numbness, tingling, or painful sensations, cough, breathlessness ,drowsiness, changes in frequency of urination', 477.00, 'Neutral\n'] , ['Monosodiumglutamate', 'C5H8NNaO4', 'A flavor enhancer often added to restaurant foods, canned vegetables , soups, deli meats and other foods', 'Natural', 'Headache, flushing, sweating, face pressure or tightness, lack of feeling (numbness), tingling or burning in the face-neck and other areas, quick fluttering heartbeats, chest pain, feeling sick (nausea), weakness', 0.27, 'Acidic\n'] , ['Aspirin', 'C9H8O4', 'Reduce fever and relieve mild to moderate pain from conditions such as muscle aches, toothache, common cold, and headache, pain and swelling', 'Artificial', 'Rash or skin reaction from a fentanyl patch. constipation. headache or dizziness', 990.00, 'Basic\n'] , ['Ebsten', 'C13H9NOSe', 'Displays anti-inflammatory, antioxidant, and cytoprotective activity, treatment of Menieres Disease, Type 2 Diabetes mellitus, and Type 1 Diabetes mellitus', 'Artificial',  'Headaches, loss of alertness, drowsiness, vomiting, hair loss, fatigue, irritability', 118.80, 'Basic\n'] , ['Sofosbuvir', 'C22H29FN3O9P', 'Reducing the amount of hepatitis C virus( viral infection of liver) and hepatitis B', 'Artificial', 'Stomach pain, vomiting, loss of appetite, slow heartbeats, chest pain, shortness of breath, memory problems, anaemia, insomnia', 204.50, 'Neutral\n'] , ['Miltefosine', 'C21H46NO2P', 'Treatment of Viscera and Cutaneous Leishmaniasis, PKDL and other parasitic infections', 'Artificial', 'Gastrointestinal disturbances, headache, fatigue, dizziness, skin irritations, electrolyte Imbalance, renal effects', 30.00, 'Acidic and Basic\n']]
+    for i in L:
+        s1=i[0]
+        s2=i[1]
+        s3=i[2]
+        s4=i[3]
+        s5=i[4]
+        s6=i[5]
+        s7=i[6]
+        print('---','Compound Name : ',s1,'\n','-','Formula : ',s2,'\n','-','Applications : ',s3,'\n','-','Occurrence [natural/artificial] : ',s4,'\n','-','Side Effects : ',s5,'\n','-','Price : ',s6,'\n','-','Chemical Nature : ',s7)
+
+def load_records():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV',database='MD')
+    mycursor=mycon.cursor()
+    
+    Q="use MD"
+    
+    q1="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Cardiac glycosides', 'C41H64O14','Increase the output force of the heart and increase its rate of contractions by acting on the cellular sodium-potassium ATPase pump','Natural','Dizziness, fatigue, headache, anxiety, gastrointestinal upset, change in taste and blurred vision',14.34,'Neutral')
+    q2="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Cisplatin', 'cis-[Pt(NH3)2Cl2]', 'To manage and treat solid tumours and hematologic malignancies and to treat advanced cancer of the bladder', 'Artificial', 'Burning, numbness, tingling, or painful sensations, cough, breathlessness ,drowsiness, changes in the frequency of urination', 477.00, 'Neutral')
+    q3="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Monosodiumglutamate', 'C5H8NNaO4', 'A flavor enhancer often added to restaurant foods, canned vegetables , soups, deli meats and other foods', 'Natural', 'Headache, flushing, sweating, face pressure or tightness, lack of feeling (numbness), tingling or burning in the face-neck and other areas, quick fluttering heartbeats, chest pain, feeling sick (nausea), weakness', 0.27, 'Acidic')
+    q4="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Aspirin', 'C9H8O4', 'Reduce fever and relieve mild to moderate pain from conditions such as muscle aches, toothache, common cold, and headache, pain and swelling', 'Artificial', 'Rash or skin reaction from a fentanyl patch. constipation. headache or dizziness', 990.00, 'Basic')
+    q5="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Ebsten', 'C13H9NOSe', 'Displays anti-inflammatory, antioxidant, and cytoprotective activity, treatment of Menieres Disease, Type 2 Diabetes mellitus, and Type 1 Diabetes mellitus', 'Artificial',  'Headaches, loss of alertness, drowsiness, vomiting, hair loss, fatigue, irritability', 118.80, 'Basic')
+    q6="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Sofosbuvir', 'C22H29FN3O9P', 'Reducing the amount of hepatitis C virus( viral infection of liver) and hepatitis B', 'Artificial', 'Stomach pain, vomiting, loss of appetite, slow heartbeats, chest pain, shortness of breath, memory problems, anaemia, insomnia', 204.50, 'Neutral')
+    q7="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Miltefosine', 'C21H46NO2P', 'Treatment of Viscera and Cutaneous Leishmaniasis, PKDL and other parasitic infections', 'Artificial', 'Gastrointestinal disturbances, headache, fatigue, dizziness, skin irritations, electrolyte Imbalance, renal effects', 30.00, 'Acidic and Basic')
+    try:
+        mycursor.execute(Q)
+        mycursor.execute(q1)
+        mycursor.execute(q2)
+        mycursor.execute(q3)
+        mycursor.execute(q4)
+        mycursor.execute(q5)
+        mycursor.execute(q6)
+        mycursor.execute(q7)
+        mycon.commit()
+        print("Records In-built")
+    except:
+        pass
+    mycon.close()
+    
+def Applications():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    cho=input("Seach application by Compound name")
+    query="select Applications from MOL where CName ='{}' ".format(cho)
+    mycursor.execute(query)
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+
+def price():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    cho=input("Seach price by Compud name")
+    query="select Price from MOL where CName ='{}' ".format(cho)
+    mycursor.execute(query)
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+        
+def formula():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    cho=input("Seach formula by Compud name")
+    query="select Formula from MOL where CName ='{}' ".format(cho)
+    mycursor.execute(query)
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+    
+def se():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    cho=input("Seach side effects by Compud name")
+    query="select SE from MOL where CName ='{}' ".format(cho)
+    mycursor.execute(query)
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+
+def addrecord():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    n=int(input("How many records do you wish to add?"))
+    for i in range(n):
+        CName = input('Enter the name of molecule to be inserted:')
+        Formula = input('Enter skeletal structural formula :')
+        Applications = input('Enter uses/application of the drug:')
+        Occurrence = input('Enter the occurrence of molecule [natural/artificial]')
+        SE = input('Enter the side effects of the drug:')
+        Price = input('Enter the price per gram (USD):')
+        Nature = input('Enter the nature of molecule [acidic/basic/neutral]')
+
+        query = "insert into MOL(CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format(CName,Formula,Applications,Occurrence,SE,Price,Nature)
+        mycursor.execute(query)
+        mycon.commit()
+        mycon.close()
+        print("Record Added")
+
+
+def readrecord():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    q='select * from MOL'
+    mycursor.execute(q)
+    dt=mycursor.fetchall()
+    for i in dt:
+        print(i)
+    mycon.close()
+
+def searchrec():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    
+    valid_attr=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
+    column_name=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
+    print(valid_attr)
+    search_attr = input("Enter the attribute to search by: ")
+
+    search_value = input("Enter the value to be searched:")
+
+    if search_attr == 'CName':
+        column_name = 'CName'
+    elif search_attr == 'Formula':
+        column_name = 'Formula'
+    elif search_attr == 'Applications':
+        column_name = 'Applications'
+    elif search_attr=='Occurrence':
+        column_name = 'Occurrence'
+    elif search_attr == 'SE':
+        column_name = 'SE'
+    elif search_attr == 'Price':
+        column_name = 'Price'
+    elif search_attr == 'Nature':
+        column_name = 'Nature'
+        
+    search_query = "SELECT * FROM MOL WHERE {} = '{}'".format(column_name, search_value)
+    mycursor.execute(search_query)
+    result = mycursor.fetchall()
+    if result:
+        for row in result:
+            print(row)
+
+
+def updaterec():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+        
+    valid_attr=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
+    column_name=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
+    print(valid_attr)
+    update_attr = input("Enter the attribute to be updated: ")
+
+    new_value = input("Enter the new value for update_attr:")
+    old_value = input("Enter the old value:")
+
+    if update_attr == 'CName':
+        column_name = 'CName'
+    elif update_attr == 'Formula':
+        column_name = 'Formula'
+    elif update_attr == 'Applications':
+        column_name = 'Applications'
+    elif update_attr =='Occurrence':
+        column_name = 'Occurrence'
+    elif update_attr == 'SE':
+        column_name = 'SE'
+    elif update_attr == 'Price':
+        column_name = 'Price'
+    elif update_attr == 'Nature':
+        column_name = 'Nature'
+
+    update_query = "UPDATE MOL SET {} = '{}' WHERE {} = '{}'".format(column_name, new_value, column_name, old_value)
+    mycursor.execute(update_query)
+    mycon.commit()
+    print("Updation done")
+    mycon.close()
+
+def deleterec():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+
+    valid_attr=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
+    column_name=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
+    print(valid_attr)
+    delete_attr = input("Enter the attribute to be deleted: ")
+
+    delete_value = input("Enter the value to be deleted:")
+
+    if delete_attr == 'CName':
+        column_name = 'CName'
+    elif delete_attr == 'Formula':
+        column_name = 'Formula'
+    elif delete_attr == 'Applications':
+        column_name = 'Applications'
+    elif delete_attr == 'Occurrence':
+        column_name = 'Occurrence'
+    elif delete_attr == 'SE':
+        column_name = 'SE'
+    elif delete_attr == 'Price':
+        column_name = 'Price'
+    elif delete_attr == 'Nature':
+        column_name = 'Nature'
+
+    delete_query="DELETE FROM MOL WHERE {} = '{}'".format(column_name,delete_value)
+    mycursor.execute(delete_query)
+    mycon.commit()
+    print("Deletion done")
+    mycon.close()
+
+
+def Occurrence_of_mol():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    cho=input(("Seach by Occurrence(Natural/Artificial)"))
+    if cho=='Natural':
+        query="select * from MOL where Occurrence ='{}' ".format(cho)
+        mycursor.execute(query)
+        G=mycursor.fetchall()
+        for i in G:
+            print(i)
+    elif cho=='Artificial':
+        query="select * from MOL where Occurrence ='{}' ".format(cho)
+        mycursor.execute(query)
+        G=mycursor.fetchall()
+        for i in G:
+            print(i)
+    else :
+        print("Invalid input")
+
+                                                                                                    
+def Natureofmol():
+    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycursor = mycon.cursor()
+    cho=input("Seach by Nature of the material(Basic/Acidic/Neutral)")
+    if cho=='Basic':
+        query="select * from MOL where Nature ='{}' ".format(cho)
+        mycursor.execute(query)
+        G=mycursor.fetchall()
+        for i in G:
+            print(i)
+
+    elif cho=='Acidic':
+        query="select * from MOL where Nature ='{}' ".format(cho)
+        mycursor.execute(query)
+        G=mycursor.fetchall()
+        for i in G:
+            print(i)
+
+    elif cho=='Neutral':
+        query="select * from MOL where Nature ='{}' ".format(cho)
+        mycursor.execute(query)
+        G=mycursor.fetchall()
+        for i in G:
+            print(i)
+    else :
+        print("Invalid input")
+
+
+while True:
+    Menu()
+    for I in range(100):
+        try:
+            uc=int(input("Enter Number of Choice: "))
+            while uc!=" ":
+                if uc==9:
+                    print("Thank You!")
+                    print("Come back soon...")
+                    sys.exit()
+                elif uc==0:
+                    create_connection()
+                    Menu()
+                    break
+                elif uc==1:
+                    view_records()
+                    Menu()
+                    break
+                elif uc==2:
+                    load_records()
+                    Menu()
+                    break
+                elif uc==3:
+                    addrecord()
+                    Menu()
+                    break
+                elif uc==4:
+                    readrecord()
+                    Menu()
+                    break
+                elif uc==5:
+                    searchrec()
+                    Menu()
+                    break
+                elif uc==6:
+                    Menu2()
+                    um=int(input("Enter Number of Choice: "))
+                    if um==1:
+                        Occurrence_of_mol()
+                    elif um==2:
+                        price()
+                    elif um==6:
+                        Natureofmol()
+                    elif um==3:
+                        formula()
+                    elif um==4:
+                        se()
+                    elif um==5:
+                        Applications()
+                    elif um==7:
+                        Menu()
+                        break
+                    else:
+                        print("Invalid input")
+                        break
+                elif uc == 7:
+                    updaterec()
+                    Menu()
+                    break
+                elif uc==8:
+                    deleterec()
+                    Menu()
+                    break
+                else:
+                    print("Invalid input")
+                    break
+        except ValueError:
+            print("Please enter valid integer.")
