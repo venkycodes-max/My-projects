@@ -1,0 +1,548 @@
+import sys
+import mysql.connector as mys
+mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+mycursor=mycon.cursor()
+q='select * from india_team'
+mycursor.execute(q)
+res=mycursor.fetchone()
+
+res=mycursor.fetchall()
+for i in res:
+    print('Name',i[0],'Role',i[1])
+
+print(res[0],res[1],res[2])
+print("t",mycursor.rowcount)
+
+#Main menu and details
+
+def Menu():
+    print()
+    print("INDIAN CRICKET TEAM")
+    print()
+    print('Menu')
+    print()
+    print("You can get the information of players: ")
+    print()
+
+    M=["1. Add a Player's Records",
+       "2. Read table",
+       "3. Search for a Player",
+       "4. Update a Player's Details",
+       "5. Details of all Bowlers",
+       "6. Details of all Batsmen",
+       "7. Details of all the All rounders",
+       "8. Details of  all the Wicketkeepers",
+       "9. Players with Age less than 30",
+       "10. Delete a Player",
+       "PRESS 0 TO EXIT"]    
+    for k in M:
+        print(k)
+
+#Adding record
+def addrecord():
+    pn=input('Enter name to be inserted: ')
+    pr=input('Enter role of player to be inserted: ')
+    pj=input('Enter jersey number of player: ')
+    pa=input('Enter age of player: ')
+    pm=input('Enter number of ODI matches played and whether they are ACTIVE/RETIRED: ')
+    R=(pn,pr,pj,pa,pm)
+    q="insert into india_team values(%s,%s,%s,%s,%s)"
+    mycursor.execute(q,R)
+    mycon.commit()
+    print("Record Added")
+
+#Reading record and displaying full table
+def readrecord():
+    mycursor.execute('select * from india_team')
+    idata=mycursor.fetchall()
+    for i in idata:
+        print(i)
+
+#Searching records
+def searchrec():
+    mycursor.execute("select * from india_team")
+    idata=mycursor.fetchall()
+    E=input("Enter player's name to be searched: ")
+    for i in idata:
+        i=list(i)
+        if i[0].upper()==E.upper():
+            A="select * from india_team where Name=%s"
+            val=(i[0],)
+            mycursor.execute(A,val)
+            for I in mycursor:
+                print(I)
+            break
+    else:
+            print("Player Does Not Exist")
+
+#Updating record information
+def updaterec():
+    mycursor.execute("select * from india_team")
+    P=mycursor.fetchall()
+    K=input("Enter player's name to update the information: ")
+    for i in P:
+        i=list(i)
+        if i[0]==K:
+            print(i)
+            print()
+            M=input("Do you want to update Role? [y/n]")
+            if M=='y' or M=='Y':
+                i[1]=input("Enter Role: ")
+            O=input("Do you want to update Jersey number? [y/n]")
+            if O=='y' or O=='Y':
+                i[2]=int(input("Enter jersey number: "))
+            S=input("Do you want to update age? [y/n]")
+            if S=='y' or S=='Y':
+                i[3]=int(input("Enter age: "))
+            V=input("Do you want to update number of matches played or whether ACTIVE/RETIRED? [y/n]")
+            if V=='y' or V=='Y':
+                i[4]=input("Enter number of matches played and ACTIVE/RETIRED: ")
+            Z="update india_team set Role=%s, Jersey_Number=%s, Age=%s,No_Of_ODI=%s where Name=%s"
+            rec=(i[1],i[2],i[3],i[4],i[0])
+            mycursor.execute(Z,rec)
+            mycon.commit()
+            print("Record Data Updated")
+            print(i)
+            break
+    else:
+        print("Player Does Not Exist")
+
+
+#Function to show all the bowlers 
+def bowlers():
+    mycursor.execute("select * from india_team where Role='Bowler'")
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+    
+
+#Function to show all the batsmen
+def batsmen():
+        mycursor.execute("select * from india_team where Role='Batsman'")
+        G=mycursor.fetchall()
+        for i in G:
+            print(i)
+        
+
+#Function to show all the All rounders
+def allrounders():
+    mycursor.execute("select * from india_team where Role='All rounder'")
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+    
+
+#Function to show all the wicketkeepers 
+def wicketkeepers():
+    mycursor.execute("select * from india_team where Role='Wicketkeeper'")
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+    
+# Function to display all the players whose age is less than 30 years
+def ageless30():
+    mycursor.execute("select * from india_team where Age<30")
+    G=mycursor.fetchall()
+    for i in G:
+        print(i)
+
+def deleterec():
+        mycursor.execute("select * from india_team")
+        W=mycursor.fetchall()
+        U=input("Enter Player's name to be Deleted: ")
+        for i in W:
+            i=list(i)
+            if i[0].upper()==U.upper():
+                q='delete from india_team where Name=%s'
+                val=(i[0],)
+                mycursor.execute(q,val)
+                mycon.commit()
+                print("Record Deleted")
+                break
+        else:
+            print("Player Does Not Exist")
+    
+    
+
+#Taking user input   
+while True:
+    Menu()
+    for I in range(100):
+        try:
+            uc=int(input("Enter Number of Choice: "))
+            while uc!='':
+                if uc==0:
+                    print("Good Bye")
+                    sys.exit()
+                elif uc==1:
+                    addrecord()
+                    Menu()
+                    break
+                elif uc==2:
+                    readrecord()
+                    Menu()
+                    break
+                elif uc==3:
+                    searchrec()
+                    Menu()
+                    break
+                elif uc==4:
+                    updaterec()
+                    Menu()
+                    break
+                elif uc==5:
+                    bowlers()
+                    Menu()
+                    break
+                elif uc==6:
+                    batsmen()
+                    Menu()
+                    break
+                elif uc==7:
+                    allrounders()
+                    Menu()
+                    break
+                elif uc==8:
+                    wicketkeepers()
+                    Menu()
+                    break
+                elif uc==9:
+                    ageless30()
+                    Menu()
+                    break
+                elif uc==10:
+                    deleterec()
+                    Menu()
+                    break
+                else:
+                    print("Invalid Input")
+                    break
+        except ValueError:
+            print("Please enter valid integer")
+
+
+
+import sys
+import mysql.connector as mys
+mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+mycursor=mycon.cursor()
+
+def Menu():
+    print()
+    print("T20 WORLD CUP 2022 TEAM INFORMATION")
+    print()
+    print('Menu')
+    print()
+    print("You can get the information of players from the following teams: ")
+    print()
+
+    L=[ ['Sl.No','Teams'],
+        ["1", "India"],
+        ["2","England"],
+        ["3","Sri Lanka"],
+        ["4","Australia"],
+        ["5","New Zealand"],
+        ["6","Pakistan"],
+        ["7","South Africa"],
+        ["8","West Indies"]]
+    for i in L:
+        for j in i:
+            print(j,end='\t')
+        print()
+
+    M=["9. Add a Player's Records",
+       "10. Read table",
+       "11. Search for a Player",
+       "12. Update a Player's Details",
+       "13. Delete a Player",
+       "PRESS 0 TO EXIT"]    
+    for k in M:
+        print(k)
+Team=input("Please enter the Correct Team name: ")
+if Team.upper()=="INDIA":
+    def addrecord():
+        pn=input('Enter name to be inserted:')
+        pr=input('Enter role of player to be inserted:')
+        pa=input('Enter age of player:')
+        pj=input('Enter jersey number of player:')
+        R=(pn,pr,pa,pj)
+        q="insert into india_team values(%s,%s,%s,%s)"
+        mycursor.execute(q,R)
+        mycon.commit()
+        print("Record Added")
+
+    def readrecord():
+        mycursor.execute('select * from india_team')
+        idata=mycursor.fetchall()
+        for i in idata:
+            i=list(i)
+            print(i[0],i[1],i[2],i[3])
+
+    def searchrec():
+        mycursor.execute("select * from india_team")
+        idata=mycursor.fetchall()
+        E=input("Enter Player's name to be Searched")
+        for i in idata:
+            i=list(i)
+            if i[0].upper()==E.upper():
+                A="select * from india_team where Name=%s"
+                val=(i[0],)
+                mycursor.execute(A,val)
+                for I in mycursor:
+                    print(I)
+                    break
+                else:
+                    print("Record Does Not Exist")
+
+    def updaterec():
+        mycursor.execute("select * from india_team")
+        P=mycursor.fetchall()
+        K=input("Enter Player's name to update the information")
+        for i in P:
+            i=list(i)
+            if i[0]==K:
+                print(i)
+                X=input("Do you want to update Name? [y/n]")
+                if X=='y' or X=='Y':
+                    i[0]=input("Enter Name")
+                M=input("Do you want to update Role? [y/n]")
+                if M=='y' or M=='Y':
+                    i[1]=input("Enter Role")
+                O=input("Do you want to update Age? [y/n]")
+                if O=='y' or O=='Y':
+                    i[2]=int(input("Enter Age"))
+                S=input("Do you want to update Jersey Number? [y/n]")
+                if S=='y' or S=='Y':
+                    i[3]=int(input("Enter Jersey Number"))
+                Z="update india_team set Name=%s, Role=%s, Age=%s, Jersey_number=%s"
+                rec=(i[0],i[1],i[2],i[3])
+                mycursor.execute(Z,rec)
+                mycon.commit()
+                print("Record Data Updated")
+                print(i)
+                break
+        else:
+            print("Record Does Not Exist")
+    def deleterec():
+        mycursor.execute("select * from india_team")
+        W=mycursor.fetchall()
+        U=input("Enter Player's name to be Searched")
+        for i in W:
+            i=list(i)
+            if i[0].upper()==U.upper():
+                cmd='delete from india_team where Name=%s'
+                val=(i[0],)
+                mycursor.execute(cmd,val)
+                mycon.commit()
+                print("Record Deleted")
+                break
+        else:
+            print("Account Does Not Exist")
+while True:
+    Menu()
+    for I in range(100):
+        try:
+            uc=int(input("Enter Number of Choice"))
+            while uc!='':
+                if uc==0:
+                    print("Good Bye")
+                    sys.exit()
+                elif uc==9:
+                    addrecord()
+                    Menu()
+                    break
+                elif uc==10:
+                    readrecord()
+                    Menu()
+                    break
+                elif uc==11:
+                    searchrec()
+                    Menu()
+                    break
+                elif uc==12:
+                    updaterec()
+                    Menu()
+                    break
+                elif uc==13:
+                    deleterec()
+                    Menu()
+                    break
+                else:
+                    print("Invalid Input")
+                    break
+        except ValueError:
+            print("Please enter valid integer")
+
+    while True:
+        Menu()
+        for I in range(100):
+            try:
+                uc=int(input("Enter Number of Choice"))
+                while uc!='':
+                    if uc==0:
+                        print("Good Bye")
+                        sys.exit()
+                    elif uc==9:
+                        addrecord()
+                        Menu()
+                        break
+                    elif uc==10:
+                        readrecord()
+                        Menu()
+                        break
+                    elif uc==11:
+                        searchrec()
+                        Menu()
+                        break
+                    elif uc==12:
+                        updaterec()
+                        Menu()
+                        break
+                    elif uc==13:
+                        deleterec()
+                        Menu()
+                        break
+                    else:
+                        print("Invalid Input")
+                        break
+            except ValueError:
+                print("Please enter valid integer")
+
+
+
+#india
+def dpind():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    mycr.execute('select * from india_team')
+    idata=mycr.fetchall()
+    print(idata)
+def insind():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    pn=input('Enter name to be inserted:')
+    pr=input('Enter role of player to be inserted:')
+    pj=input('Enter jersey number of player:')
+    pa=input('Enter age of player:')
+    q="insert into india_team(Name, Role, Age, Jersey_Number) values ('{}','{}','{}','{}')".format(pn,pr,pa,pj)
+    mycr.execute(q)
+    mycon.commit()
+
+#england
+def dpeng():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    mycr.execute('select * from england_team')
+    data=mycr.fetchall()
+    print(data)
+def inseng():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    pn=input('Enter name to be inserted:')
+    pr=input('Enter role of player to be inserted:')
+    pj=input('Enter jersey number of player:')
+    pa=input('Enter age of player:')
+    q="insert into england_team(Name, Role, Age, Jersey_Number) values ('{}','{}','{}','{}')".format(pn,pr,pa,pj)
+    mycr.execute(q)
+    mycon.commit()
+
+#australia
+def dpaus():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    mycr.execute('select * from australia_team')
+    data=mycr.fetchall()
+    print(data)
+def insaus():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    pn=input('Enter name to be inserted:')
+    pr=input('Enter role of player to be inserted:')
+    pj=input('Enter jersey number of player:')
+    pa=input('Enter age of player:')
+    q="insert into australia_team(Name, Role, Age, Jersey_Number) values ('{}','{}','{}','{}')".format(pn,pr,pa,pj)
+    mycr.execute(q)
+    mycon.commit()
+#new zealand
+def dpnz():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    mycr.execute('select * from newzealand_team')
+    data=mycr.fetchall()
+    print(data)
+def insnz():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    pn=input('Enter name to be inserted:')
+    pr=input('Enter role of player to be inserted:')
+    pj=input('Enter jersey number of player:')
+    pa=input('Enter age of player:')
+    q="insert into newzealand_team(Name, Role, Age, Jersey_Number) values ('{}','{}','{}','{}')".format(pn,pr,pa,pj)
+    mycr.execute(q)
+    mycon.commit()
+#pakistan
+def dppak():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    mycr.execute('select * from pakistan_team')
+    data=mycr.fetchall()
+    print(data)
+def inspak():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    pn=input('Enter name to be inserted:')
+    pr=input('Enter role of player to be inserted:')
+    pj=input('Enter jersey number of player:')
+    pa=input('Enter age of player:')
+    q="insert into pakistan_team(Name, Role, Age, Jersey_Number) values ('{}','{}','{}','{}')".format(pn,pr,pa,pj)
+    mycr.execute(q)
+    mycon.commit()
+def dpsa():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    mycr.execute('select * from southafrica_team')
+    data=mycr.fetchall()
+    print(data)
+
+def dpsl():
+    import mysql.connector as mys
+    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycr=mycon.cursor()
+    mycr.execute('select * from srilanka_team')
+    data=mycr.fetchall()
+    print(data)
+
+Menu()
+    
+ch1=int(input('Enter the number of team to be searched: '))
+if ch1==1:
+    x=int(input('Display-1 insert-2'))
+    if x==1:
+        dpind()
+    elif x==2:
+        insind()
+elif ch1==2:
+    dpeng()
+elif ch1==3:
+    dpsl()
+elif ch1==4:
+    dpaus()
+elif ch1==5:
+    dpnz()
+elif ch1==6:
+    dppak()
+elif ch1==7:
+    dpsa()
+else:
+    print('invalid entry')
