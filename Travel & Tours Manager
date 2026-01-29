@@ -1,0 +1,75 @@
+print("--------------------------------------------------JAVT Tours and Travels----------------------------------------")
+print("\n--------------------Tourists Information system---------------------")
+
+print("\nPlace codes: \n 1=J&K , 2=Goa , 3=Paris , 4=Maldives, 5= London , 6=Moscow, 7=Egypt , 8=Bali , 9=Istanbul , 10= Dubai")
+
+print("\nFood codes: \n 101=Vegetarian , 102=Non-vegetarian , 103=Jain , 104=Buddhist\n")
+
+print("\nEmergency Services: Ambulance services, Emergency Medical Services, Fire Service, Search and Mountain Rescue Teams, Coastguard, First-Aid")
+
+print("\nTransport Services: Car Services, Passenger Cruise, Railways(Booking services), Aeroplanes Services\n")
+
+
+
+name=input("Enter name:")
+
+contno=int(input("Enter your contact number:"))
+
+place={1:"J&K",2:"Goa",3:"Paris",4:"Maldives",5:"London",6:"Moscow",7:"Egypt",8:"Bali",9:"Istanbul",10:"Dubai"}
+
+accd=input("Enter choice of accommodation")
+
+food={101:"Vegetarian",102:"Non-vegetarian",103:"Jain",104:"Buddhist"}
+
+lang={"Y":"Yes","N":"No"} 
+
+temp_climate={"J&K":3,"Goa":29,"Paris":10,"Maldives":27,"London":8,"Moscow":-8,"Egypt":24,"Bali":23,"Istanbul":12,"Dubai":24}
+
+entertain=input("Enter entertainment and recreational activity preferences: ")
+
+package=[("J&K",'10,000-30,000'),("Goa",'15,000-50,000'),("Paris",'2,00,000-5,00,000'),("Maldives",'-1,00,000-2,00,000'),("London",'3,00,000-4,00,000'),("Moscow",'1,00,000-1,50,000'),
+         ("Egypt",'50,000-1,50,000'),("Bali",'15,000-50,000'),("Istanbul",'15,000-50,000'),("Dubai",'1,00,000-2,50,000')]
+
+emg_services={"Y":"Yes","N":"No"}
+
+transport=input("Enter your transport preferrence")
+
+
+x=int(input("Enter code corresponding to place:"))
+place=place.get(x)
+
+y=int(input("Enter code corresponding to food type:"))
+food=food.get(y)
+
+z=input("Enter requirement of translator(Y/N):")
+lang=lang.get(z)
+
+t= temp_climate.get(place)
+
+print('\n------------------------------------------')
+print("\nTOURIST INFORMATION")
+print("Visiting Place=",place)
+print("Food Choice=",food)
+print("Translator Requirement=",lang)
+print("Temperature in",place,"is",t,"°C")
+print("Entertainment and Recreational activity preferences:",entertain)
+print("Suggested Package Range:",package[x-1][1] )
+print('\n------------------------------------------')
+
+print("\nGUIDELINES")
+
+for i in temp_climate.values():
+    if i==t:
+        if i<25:
+            print("Recommended clothes: Sweater,Jackets, Gloves, Scarf, Water-resistant coat and boots and Bed socks")
+        if i>25:
+            print("Recommended clothes: Lighter-coloured,Uncoated cotton, linen, nylon and polyester, fabrics with loose weaves ,sunscreen, stay hydrated")
+
+print("\nDISCOUNTS AVAILABLE")
+
+import random
+
+discount=random.randint(5,20)
+print("You’ve got discount of",discount,"%")
+
+print("\nWe hope you enjoy and cherish every moment of joy during your journey with us!")
