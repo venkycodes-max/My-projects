@@ -48,7 +48,7 @@ def Menu2():
 
     
 def create_connection():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd')
     try:
         if mycon.is_connected:
             print("Connection done")
@@ -63,7 +63,7 @@ def create_connection():
         pass
     mycon.close()
     
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV',database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd',database='your-database-name')
     mycursor=mycon.cursor()
     
     table_query = "create table MOL (CName varchar(225), Formula varchar(255), Applications varchar(255), Occurrence varchar(255), SE varchar(225),Price decimal(8,2),Nature varchar(25)) "
@@ -76,7 +76,7 @@ def create_connection():
     mycon.close()
 
 def view_records():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV',database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd',database='your-database-name')
     mycursor=mycon.cursor()
     
     L = [['Cardiac glycosides', 'C41H64O14', 'Increase the output force of the heart and increase its rate of contractions by acting on the cellular sodium-potassium ATPase pump', 'Natural', 'Dizziness, fatigue, headache, anxiety, gastrointestinal upset, change in taste and blurred vision', 14.34, 'Neutral\n'] , ['Cisplatin', 'cis-[Pt(NH3)2Cl2]', 'To manage and treat solid tumours and hematologic malignancies and to treat advanced cancer of the bladder', 'Artificial', 'Burning, numbness, tingling, or painful sensations, cough, breathlessness ,drowsiness, changes in frequency of urination', 477.00, 'Neutral\n'] , ['Monosodiumglutamate', 'C5H8NNaO4', 'A flavor enhancer often added to restaurant foods, canned vegetables , soups, deli meats and other foods', 'Natural', 'Headache, flushing, sweating, face pressure or tightness, lack of feeling (numbness), tingling or burning in the face-neck and other areas, quick fluttering heartbeats, chest pain, feeling sick (nausea), weakness', 0.27, 'Acidic\n'] , ['Aspirin', 'C9H8O4', 'Reduce fever and relieve mild to moderate pain from conditions such as muscle aches, toothache, common cold, and headache, pain and swelling', 'Artificial', 'Rash or skin reaction from a fentanyl patch. constipation. headache or dizziness', 990.00, 'Basic\n'] , ['Ebsten', 'C13H9NOSe', 'Displays anti-inflammatory, antioxidant, and cytoprotective activity, treatment of Menieres Disease, Type 2 Diabetes mellitus, and Type 1 Diabetes mellitus', 'Artificial',  'Headaches, loss of alertness, drowsiness, vomiting, hair loss, fatigue, irritability', 118.80, 'Basic\n'] , ['Sofosbuvir', 'C22H29FN3O9P', 'Reducing the amount of hepatitis C virus( viral infection of liver) and hepatitis B', 'Artificial', 'Stomach pain, vomiting, loss of appetite, slow heartbeats, chest pain, shortness of breath, memory problems, anaemia, insomnia', 204.50, 'Neutral\n'] , ['Miltefosine', 'C21H46NO2P', 'Treatment of Viscera and Cutaneous Leishmaniasis, PKDL and other parasitic infections', 'Artificial', 'Gastrointestinal disturbances, headache, fatigue, dizziness, skin irritations, electrolyte Imbalance, renal effects', 30.00, 'Acidic and Basic\n']]
@@ -91,7 +91,7 @@ def view_records():
         print('---','Compound Name : ',s1,'\n','-','Formula : ',s2,'\n','-','Applications : ',s3,'\n','-','Occurrence [natural/artificial] : ',s4,'\n','-','Side Effects : ',s5,'\n','-','Price : ',s6,'\n','-','Chemical Nature : ',s7)
 
 def load_records():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV',database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd',database='your-database-name')
     mycursor=mycon.cursor()
     
     Q="use MD"
@@ -103,6 +103,31 @@ def load_records():
     q5="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Ebsten', 'C13H9NOSe', 'Displays anti-inflammatory, antioxidant, and cytoprotective activity, treatment of Menieres Disease, Type 2 Diabetes mellitus, and Type 1 Diabetes mellitus', 'Artificial',  'Headaches, loss of alertness, drowsiness, vomiting, hair loss, fatigue, irritability', 118.80, 'Basic')
     q6="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Sofosbuvir', 'C22H29FN3O9P', 'Reducing the amount of hepatitis C virus( viral infection of liver) and hepatitis B', 'Artificial', 'Stomach pain, vomiting, loss of appetite, slow heartbeats, chest pain, shortness of breath, memory problems, anaemia, insomnia', 204.50, 'Neutral')
     q7="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Miltefosine', 'C21H46NO2P', 'Treatment of Viscera and Cutaneous Leishmaniasis, PKDL and other parasitic infections', 'Artificial', 'Gastrointestinal disturbances, headache, fatigue, dizziness, skin irritations, electrolyte Imbalance, renal effects', 30.00, 'Acidic and Basic')
+    q8="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Paracetamol', 'C8H9NO2', 'Used to relieve mild to moderate pain and reduce fever', 'Artificial', 'Nausea, rash, allergic reactions, stomach pain, liver damage in excessive doses', 12.50, 'Neutral')
+    q9="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Ibuprofen', 'C13H18O2', 'Used to reduce pain, fever, and inflammation', 'Artificial', 'Stomach upset, nausea, dizziness, headache, gastrointestinal bleeding', 18.75, 'Acidic')
+    q10="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Amoxicillin', 'C16H19N3O5S', 'Used to treat various bacterial infections', 'Artificial', 'Nausea, diarrhea, skin rash, vomiting, allergic reactions', 45.00, 'Basic')
+    q11="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Metformin', 'C4H11N5', 'Used to control high blood sugar levels in people with type 2 diabetes', 'Artificial', 'Nausea, diarrhea, stomach discomfort, loss of appetite, weakness', 22.50, 'Basic')
+    q12="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Caffeine', 'C8H10N4O2', 'Used as a stimulant and naturally occurs in coffee, tea, and cocoa', 'Natural', 'Insomnia, nervousness, increased heart rate, headache, stomach irritation', 8.50, 'Basic')
+    q13="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Nicotine', 'C10H14N2', 'A naturally occurring alkaloid found in tobacco plants and used in nicotine replacement products', 'Natural', 'Nausea, dizziness, increased heart rate, headache, dependence', 35.00, 'Basic')
+    q14="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Citric acid', 'C6H8O7', 'Used as a food acidulant, preservative, flavoring agent, and cleaning agent', 'Natural', 'Stomach irritation, tooth enamel erosion, skin irritation in concentrated forms', 6.25, 'Acidic')
+    q15="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Lactic acid', 'C3H6O3', 'Used in food preservation, fermentation, cosmetics, and industrial applications', 'Natural', 'Skin irritation, eye irritation, burning sensation at high concentrations', 9.50, 'Acidic')
+    q16="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Ascorbic acid', 'C6H8O6', 'Used as vitamin C supplement and antioxidant and in food preservation', 'Natural', 'Stomach upset, diarrhea, nausea, abdominal cramps at high doses', 15.00, 'Acidic')
+    q17="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Glucose', 'C6H12O6', 'Primary energy source for cells and an important carbohydrate in food and metabolism', 'Natural', 'Increased blood glucose, thirst, frequent urination when present in excess', 7.50, 'Neutral')
+    q18="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Fructose', 'C6H12O6', 'A naturally occurring sugar found in fruits, honey, and many plants', 'Natural', 'Digestive discomfort, bloating, diarrhea, abdominal pain in sensitive individuals', 7.25, 'Neutral')
+    q19="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Sucrose', 'C12H22O11', 'Common table sugar used as a sweetener in foods and beverages', 'Natural', 'Tooth decay, weight gain, increased blood glucose when consumed excessively', 5.50, 'Neutral')
+    q20="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Lysine', 'C6H14N2O2', 'An essential amino acid involved in protein synthesis and nutritional metabolism', 'Natural', 'Nausea, diarrhea, abdominal discomfort at high supplemental doses', 28.00, 'Basic')
+    q21="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Glycine', 'C2H5NO2', 'An amino acid used in protein synthesis and various biochemical processes', 'Natural', 'Nausea, stomach discomfort, soft stools at high doses', 20.00, 'Acidic and Basic')
+    q22="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Glutamic acid', 'C5H9NO4', 'An amino acid involved in metabolism and neurotransmitter-related biochemical processes', 'Natural', 'Headache, nausea, gastrointestinal discomfort in sensitive individuals', 24.50, 'Acidic')
+    q23="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Urea', 'CH4N2O', 'Used as a nitrogen fertilizer and produced naturally as a waste product of protein metabolism', 'Natural', 'Skin irritation, eye irritation, respiratory irritation in concentrated exposure', 4.75, 'Neutral')
+    q24="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Cholesterol', 'C27H46O', 'An essential component of cell membranes and a precursor for steroid hormones and bile acids', 'Natural', 'High blood cholesterol can contribute to cardiovascular disease risk', 32.00, 'Neutral')
+    q25="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Vitamin A', 'C20H30O', 'Supports vision, immune function, growth, and maintenance of body tissues', 'Natural', 'Headache, nausea, dizziness, skin changes, liver damage at excessive doses', 40.00, 'Neutral')
+    q26="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Vitamin D3', 'C27H44O', 'Supports calcium absorption, bone health, and normal immune function', 'Natural', 'Nausea, weakness, excessive thirst, kidney problems at excessive doses', 38.00, 'Neutral')
+    q27="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Hydrogen peroxide', 'H2O2', 'Used as an oxidizing agent, disinfectant, bleaching agent, and laboratory reagent', 'Artificial', 'Skin irritation, eye damage, respiratory irritation, gastrointestinal injury if swallowed', 3.50, 'Acidic')
+    q28="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Sodium bicarbonate', 'NaHCO3', 'Used as a leavening agent, antacid, cleaning agent, and laboratory chemical', 'Natural', 'Gas, stomach discomfort, increased sodium levels with excessive consumption', 2.75, 'Basic')
+    q29="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Calcium carbonate', 'CaCO3', 'Used as a calcium supplement, antacid, construction material, and industrial chemical', 'Natural', 'Constipation, stomach discomfort, kidney stones with excessive intake', 3.25, 'Basic')
+    q30="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Ethanol', 'C2H6O', 'Used as a solvent, disinfectant, fuel, and in alcoholic beverages', 'Natural', 'Drowsiness, impaired coordination, nausea, dehydration, liver damage with excessive consumption', 10.00, 'Neutral')
+    q31="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Acetic acid', 'C2H4O2', 'Used in vinegar production, food preservation, chemical manufacturing, and cleaning products', 'Natural', 'Skin burns, eye irritation, respiratory irritation at high concentrations', 5.25, 'Acidic')
+    q32="insert into MOL (CName,Formula,Applications,Occurrence,SE,Price,Nature) values('{}','{}','{}','{}','{}',{},'{}')".format('Sodium chloride', 'NaCl', 'Used as table salt, food preservative, electrolyte, and industrial chemical', 'Natural', 'Increased blood pressure and fluid retention with excessive consumption', 2.00, 'Neutral')
     try:
         mycursor.execute(Q)
         mycursor.execute(q1)
@@ -112,6 +137,31 @@ def load_records():
         mycursor.execute(q5)
         mycursor.execute(q6)
         mycursor.execute(q7)
+        mycursor.execute(q8)
+        mycursor.execute(q9)
+        mycursor.execute(q10)
+        mycursor.execute(q11)
+        mycursor.execute(q12)
+        mycursor.execute(q13)
+        mycursor.execute(q14)
+        mycursor.execute(q15)
+        mycursor.execute(q16)
+        mycursor.execute(q17)
+        mycursor.execute(q18)
+        mycursor.execute(q19)
+        mycursor.execute(q20)
+        mycursor.execute(q21)
+        mycursor.execute(q22)
+        mycursor.execute(q23)
+        mycursor.execute(q24)
+        mycursor.execute(q25)
+        mycursor.execute(q26)
+        mycursor.execute(q27)
+        mycursor.execute(q28)
+        mycursor.execute(q29)
+        mycursor.execute(q30)
+        mycursor.execute(q31)
+        mycursor.execute(q32)
         mycon.commit()
         print("Records In-built")
     except:
@@ -119,7 +169,7 @@ def load_records():
     mycon.close()
     
 def Applications():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     cho=input("Seach application by Compound name")
     query="select Applications from MOL where CName ='{}' ".format(cho)
@@ -129,7 +179,7 @@ def Applications():
         print(i)
 
 def price():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     cho=input("Seach price by Compud name")
     query="select Price from MOL where CName ='{}' ".format(cho)
@@ -139,7 +189,7 @@ def price():
         print(i)
         
 def formula():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     cho=input("Seach formula by Compud name")
     query="select Formula from MOL where CName ='{}' ".format(cho)
@@ -149,7 +199,7 @@ def formula():
         print(i)
     
 def se():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     cho=input("Seach side effects by Compud name")
     query="select SE from MOL where CName ='{}' ".format(cho)
@@ -159,7 +209,7 @@ def se():
         print(i)
 
 def addrecord():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     n=int(input("How many records do you wish to add?"))
     for i in range(n):
@@ -179,7 +229,7 @@ def addrecord():
 
 
 def readrecord():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     q='select * from MOL'
     mycursor.execute(q)
@@ -189,7 +239,7 @@ def readrecord():
     mycon.close()
 
 def searchrec():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     
     valid_attr=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
@@ -223,7 +273,7 @@ def searchrec():
 
 
 def updaterec():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
         
     valid_attr=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
@@ -256,7 +306,7 @@ def updaterec():
     mycon.close()
 
 def deleterec():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
 
     valid_attr=['CName','Formula','Applications','Occurrence','SE','Price','Nature']
@@ -289,7 +339,7 @@ def deleterec():
 
 
 def Occurrence_of_mol():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     cho=input(("Seach by Occurrence(Natural/Artificial)"))
     if cho=='Natural':
@@ -309,7 +359,7 @@ def Occurrence_of_mol():
 
                                                                                                     
 def Natureofmol():
-    mycon = mys.connect(host='localhost', user='root', passwd='Venky#2024Ramaiah_VV', database='MD')
+    mycon = mys.connect(host='your-host-name', user='your-user-name', passwd='your-local-sql-passwd', database='your-database-name')
     mycursor = mycon.cursor()
     cho=input("Seach by Nature of the material(Basic/Acidic/Neutral)")
     if cho=='Basic':
