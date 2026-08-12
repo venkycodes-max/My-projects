@@ -2,7 +2,7 @@
 
 A collection of three beginner-friendly Python projects demonstrating Python programming, MySQL database connectivity, CRUD operations, searching, updating, and data management.
 
-__1. Molecular Database__
+## 1. Molecular Database
 
 A command-line drug and chemical information management system built with Python and MySQL.
 
@@ -42,7 +42,7 @@ Technologies-
     MySQL
     mysql-connector-python
 
-__2. Indian Cricket & T20 World Cup Team Database__
+## 2. Indian Cricket & T20 World Cup Team Database
 
 A Python and MySQL-based cricket team information system.
 
@@ -88,7 +88,7 @@ Technologies-
     MySQL
     mysql-connector-python
 
-__3. JAVT Tours and Travels__
+## 3. JAVT Tours and Travels
 
 A Tourist Information System built with Python and MySQL for managing traveller preferences and tour information.
 
@@ -136,7 +136,7 @@ Technologies-
 
 
 
-__Installations__
+## Installations
 
 1) Install the MySQL connector:
 
@@ -152,22 +152,23 @@ Make sure MySQL Server is running before starting the database-based projects.
 
 Do not commit your actual MySQL password to GitHub.
 
-__Project Structure__
+## Project Structure
 
-Python-MySQL-Projects/
-│
-├── Molecular-Database/
-│   └── molecular_database.py
-│
-├── Cricket-Team-Database/
-│   └── cricket_database.py
-│
-├── JAVT-Tours-and-Travels/
-│   ├── javt_tours.py
-│   └── schema.sql
-│
-└── README.md
+        ```text
+        Python-MySQL-Projects/
+        │
+        ├── Molecular-Database/
+        │   └── molecular_database.py
+        │
+        ├── Cricket-Team-Database/
+        │   └── cricket_database.py
+        │
+        ├── JAVT-Tours-and-Travels/
+        │   ├── javt_tours.py
+        │   └── schema.sql
+        │
+        └── README.md
 
-__Purpose__
+## Purpose
 
     These projects were created to practice Python, MySQL connectivity, database management, CRUD operations, SQL queries, functions, conditional logic, and command-line application development.
