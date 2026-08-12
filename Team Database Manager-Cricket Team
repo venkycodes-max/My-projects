@@ -1,6 +1,6 @@
 import sys
 import mysql.connector as mys
-mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
 mycursor=mycon.cursor()
 q='select * from india_team'
 mycursor.execute(q)
@@ -224,7 +224,7 @@ while True:
 
 import sys
 import mysql.connector as mys
-mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
 mycursor=mycon.cursor()
 
 def Menu():
@@ -413,14 +413,14 @@ while True:
 #india
 def dpind():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     mycr.execute('select * from india_team')
     idata=mycr.fetchall()
     print(idata)
 def insind():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     pn=input('Enter name to be inserted:')
     pr=input('Enter role of player to be inserted:')
@@ -433,14 +433,14 @@ def insind():
 #england
 def dpeng():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     mycr.execute('select * from england_team')
     data=mycr.fetchall()
     print(data)
 def inseng():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     pn=input('Enter name to be inserted:')
     pr=input('Enter role of player to be inserted:')
@@ -453,14 +453,14 @@ def inseng():
 #australia
 def dpaus():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     mycr.execute('select * from australia_team')
     data=mycr.fetchall()
     print(data)
 def insaus():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     pn=input('Enter name to be inserted:')
     pr=input('Enter role of player to be inserted:')
@@ -472,14 +472,14 @@ def insaus():
 #new zealand
 def dpnz():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     mycr.execute('select * from newzealand_team')
     data=mycr.fetchall()
     print(data)
 def insnz():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     pn=input('Enter name to be inserted:')
     pr=input('Enter role of player to be inserted:')
@@ -491,14 +491,14 @@ def insnz():
 #pakistan
 def dppak():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     mycr.execute('select * from pakistan_team')
     data=mycr.fetchall()
     print(data)
 def inspak():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     pn=input('Enter name to be inserted:')
     pr=input('Enter role of player to be inserted:')
@@ -509,7 +509,7 @@ def inspak():
     mycon.commit()
 def dpsa():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     mycr.execute('select * from southafrica_team')
     data=mycr.fetchall()
@@ -517,7 +517,7 @@ def dpsa():
 
 def dpsl():
     import mysql.connector as mys
-    mycon=mys.connect(host='localhost',user='root',passwd='isgsql',database='ikproject')
+    mycon=mys.connect(host='your-host-name',user='your-user-name',passwd='your-local-sql-passwd',database='your-database-name')
     mycr=mycon.cursor()
     mycr.execute('select * from srilanka_team')
     data=mycr.fetchall()
