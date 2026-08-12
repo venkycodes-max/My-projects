@@ -1,4 +1,4 @@
-**Python & MySQL Projects**
+# Python & MySQL Projects
 
 A collection of three beginner-friendly Python projects demonstrating Python programming, MySQL database connectivity, CRUD operations, searching, updating, and data management.
 
@@ -135,7 +135,8 @@ Technologies-
     mysql-connector-python
 
 
-__Installation__
+
+__Installations__
 
 1) Install the MySQL connector:
 
@@ -151,7 +152,8 @@ Make sure MySQL Server is running before starting the database-based projects.
 
 Do not commit your actual MySQL password to GitHub.
 
-📁 Project Structure
+__Project Structure__
+
 Python-MySQL-Projects/
 │
 ├── Molecular-Database/
