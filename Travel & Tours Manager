@@ -1,4 +1,4 @@
-import random
+import sys
 import mysql.connector as mys
 from mysql.connector import Error
 
